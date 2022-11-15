@@ -42,7 +42,7 @@ RUN apt-get update && \
 
 
 # Download latest nomachine-server
-RUN DLLINK=$(wget --save-headers --output-document - https://downloads.nomachine.com/de/download/?id=2 | grep download.nomachine.com | cut -d '"' -f6 | head -1) && wget -O nomachine.deb $DLLINK && dpkg -i nomachine.deb
+RUN DLLINK=$(wget --save-headers --output-document - https://downloads.nomachine.com/de/download/?id=5 | grep download.nomachine.com | cut -d '"' -f6 | head -1) && wget -O nomachine.deb $DLLINK && dpkg -i nomachine.deb
 
 
 # ADD nxserver.sh
