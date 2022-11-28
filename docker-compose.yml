@@ -18,3 +18,6 @@ services:
     - {{ X2GO_PORT }}:22/TCP
     volumes:
     - mate-desktop:/data
+volumes:
+  mate-desktop:
+    driver: local
