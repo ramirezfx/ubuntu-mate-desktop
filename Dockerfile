@@ -44,6 +44,10 @@ RUN DLLINK=$(wget --save-headers --output-document - https://downloads.nomachine
 RUN wget -O /nxserver.sh https://raw.githubusercontent.com/ramirezfx/ubuntu-mate-desktop/main/nxserver.sh
 RUN chmod +x /nxserver.sh
 
+# Create Data-Directory for Container
+RUN mkdir /data
+RUN chmod 777 /data
+
 # Download latest Google Chrome-Browser
 
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
