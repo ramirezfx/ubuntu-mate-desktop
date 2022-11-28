@@ -35,7 +35,7 @@ Modify all variables (In brackets):
 
 - PASSWORD={{ PASSWORD }} -> Change this to the password you wanna use (example: - PASSWORD=mate)
 
-image: ramirezfx/ubuntu-mate-desktop-002-de:{{ VERSION }} -> Change this to the version you wanna use (example: image: ramirezfx/ubuntu-mate-desktop-002-de:kinetic)
+image: ramirezfx/ubuntu-mate-desktop-002-de:{{ VERSION }} -> Change this to the version you wanna use (example: image: ramirezfx/ubuntu-mate:latest)
 
 - {{ NOMACHINE_PORT }}:4000/tcp -> Change this to the port you wanna use for the NoMachine-Client (example: - 4000:4000/tcp) for Port 4000 (Default)
 
@@ -75,11 +75,11 @@ Install GIT:
 
 Clone this Repo:
 
-`git clone https://github.com/ramirezfx/ubuntu-mate-desktop-002-de.git`
+`git clone --branch 0.0.3-DE https://github.com/ramirezfx/ubuntu-mate-desktop.git`
 
 Navigate into the project-folder:
 
-`cd ubuntu-mate-desktop-002-de`
+`cd ubuntu-mate-desktop`
 
 Change the file-attributes:
 
