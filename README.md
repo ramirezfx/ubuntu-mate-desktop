@@ -1,4 +1,4 @@
-# ubuntu-mate-desktop-002-de
+# ubuntu-mate-desktop-003-de
 
 This docker-stack contains a full-working Virtual Ubuntu MATE Desktop which is accessible via NoMachine-Client (https://www.nomachine.com). Clients available for Windows/Linux/Mac OS/Raspberry PI
 The deskop can also be accessed via the X2GO-Client (https://x2go.org). Clients are available for Windows/Linux/Mac OS/Raspberry PI
@@ -15,11 +15,11 @@ Install GIT:
 
 Clone this Repo:
 
-`git clone https://github.com/ramirezfx/ubuntu-mate-desktop-002-de.git`
+`git clone --branch 0.0.3-DE https://github.com/ramirezfx/ubuntu-mate-desktop.git`
 
 Navigate into the project-folder:
 
-`cd ubuntu-mate-desktop-002-de`
+`cd ubuntu-mate-desktop`
 
 Change the file-attributes:
 
