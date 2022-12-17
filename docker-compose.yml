@@ -9,6 +9,7 @@ services:
     - PASSWORD={{ PASSWORD }}
     - LANG={{ LANG }}
     - TZ={{ TZ }}
+    - KBD_LANG={{ KBDLANG }}
     cap_add:
     - SYS_PTRACE
     image: ramirezfx/ubuntu-mate-desktop:{{ VERSION }}
