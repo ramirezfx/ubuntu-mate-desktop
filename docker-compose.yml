@@ -7,6 +7,8 @@ services:
     environment:
     - USER={{ USERNAME }}
     - PASSWORD={{ PASSWORD }}
+    - LANG={{ LANG }}
+    - TZ={{ TZ }}
     cap_add:
     - SYS_PTRACE
     image: ramirezfx/ubuntu-mate-desktop:{{ VERSION }}
