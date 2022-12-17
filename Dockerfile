@@ -13,9 +13,9 @@ ENV SHELL=/bin/bash
 #   replace en_US by your desired locale setting, 
 #   for example de_DE for german.
 #   Get a complete List at https://docs.moodle.org/dev/Table_of_locales
-ENV LANG de_AT.UTF-8
+# ENV LANG de_AT.UTF-8
 # Set Timezone - Get a completet List by typing: cd /usr/share/zoneinfo/posix && find * -type f -or -type l | sort
-ENV TZ=Europe/Vienna
+# ENV TZ=Europe/Vienna
 
 RUN bash -c 'if test -n "$http_proxy"; then echo "Acquire::http::proxy \"$http_proxy\";" > /etc/apt/apt.conf.d/99proxy; else echo "Using direct network connection."; fi'
 
@@ -62,13 +62,13 @@ RUN apt-get install -y /tmp/google-chrome-stable_current_amd64.deb
 # RUN sudo sed -i 's/\/usr\/bin\/google-chrome-stable %U/\/usr\/bin\/google-chrome-stable --no-sandbox/g' /usr/share/applications/google-chrome.desktop
 
 # Set Timezone
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+# RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 
-RUN echo $LANG UTF-8 > /etc/locale.gen && \
-    env DEBIAN_FRONTEND=noninteractive apt-get install -y \
-     locales && \
-    lsb_release -cs | grep -qE "precise|trusty" && locale-gen $LANG || update-locale --reset LANG=$LANG
+# RUN echo $LANG UTF-8 > /etc/locale.gen && \
+#     env DEBIAN_FRONTEND=noninteractive apt-get install -y \
+#     locales && \
+#    lsb_release -cs | grep -qE "precise|trusty" && locale-gen $LANG || update-locale --reset LANG=$LANG
 
 RUN if lsb_release -cs | grep -qE "precise|xenial"; then \
     echo "Notice: it is precise or xenial, need workaround for resolvconf." && \
