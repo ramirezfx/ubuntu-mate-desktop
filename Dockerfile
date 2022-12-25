@@ -37,7 +37,7 @@ RUN wget -O nomachine.deb https://download.nomachine.com/download/8.2/Arm/nomach
 
 
 # ADD nxserver.sh
-RUN wget -O /nxserver.sh https://raw.githubusercontent.com/ramirezfx/ubuntu-mate-desktop/0.0.3-DE/nxserver.sh
+RUN wget -O /nxserver.sh https://raw.githubusercontent.com/ramirezfx/ubuntu-mate-desktop/0.0.4-DE-arm64/nxserver.sh
 RUN chmod +x /nxserver.sh
 
 # Custom Packages And Sripts:
