@@ -5,18 +5,9 @@
 
 
 # SET Version
-ARG VER=kinetic
+ARG VER=jammy-arm64
 FROM ramirezfx/ubuntu-mate-iso:$VER
 ENV SHELL=/bin/bash
-
-# Language/locale settings
-#   replace en_US by your desired locale setting, 
-#   for example de_DE for german.
-#   Get a complete List at https://docs.moodle.org/dev/Table_of_locales
-# ENV LANG de_AT.UTF-8
-# Set Timezone - Get a completet List by typing: cd /usr/share/zoneinfo/posix && find * -type f -or -type l | sort
-# ENV TZ=Europe/Vienna
-
 RUN bash -c 'if test -n "$http_proxy"; then echo "Acquire::http::proxy \"$http_proxy\";" > /etc/apt/apt.conf.d/99proxy; else echo "Using direct network connection."; fi'
 
 RUN apt-get update && \
@@ -42,61 +33,16 @@ RUN apt-get update && \
 
 
 # Download latest nomachine-server
-RUN DLLINK=$(wget --save-headers --output-document - https://downloads.nomachine.com/de/download/?id=5 | grep download.nomachine.com | cut -d '"' -f6 | head -1) && wget -O nomachine.deb $DLLINK && dpkg -i nomachine.deb
+RUN wget -O nomachine.deb https://download.nomachine.com/download/8.2/Arm/nomachine_8.2.3_3_arm64.deb && dpkg -i nomachine.deb
 
 
 # ADD nxserver.sh
 RUN wget -O /nxserver.sh https://raw.githubusercontent.com/ramirezfx/ubuntu-mate-desktop/0.0.3-DE/nxserver.sh
 RUN chmod +x /nxserver.sh
 
-# Create Data-Directory for Container
-RUN mkdir /data
-RUN chmod 777 /data
-
-# Download latest Google Chrome-Browser
-
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
-RUN apt-get install -y /tmp/google-chrome-stable_current_amd64.deb
-# RUN sed -i 's/\/usr\/bin\/google-chrome-stable/\/usr\/bin\/google-chrome-stable --no-sandbox/g' /usr/share/applications/google-chrome.desktop
-# RUN sed -i 's/\/usr\/bin\/google-chrome-stable --incognito/\/usr\/bin\/google-chrome-stable --no-sandbox/g' /usr/share/applications/google-chrome.desktop
-# RUN sudo sed -i 's/\/usr\/bin\/google-chrome-stable %U/\/usr\/bin\/google-chrome-stable --no-sandbox/g' /usr/share/applications/google-chrome.desktop
-
-# Set Timezone
-# RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
-
-# RUN echo $LANG UTF-8 > /etc/locale.gen && \
-#     env DEBIAN_FRONTEND=noninteractive apt-get install -y \
-#     locales && \
-#    lsb_release -cs | grep -qE "precise|trusty" && locale-gen $LANG || update-locale --reset LANG=$LANG
-
-RUN if lsb_release -cs | grep -qE "precise|xenial"; then \
-    echo "Notice: it is precise or xenial, need workaround for resolvconf." && \
-    echo "resolvconf resolvconf/linkify-resolvconf boolean false" | debconf-set-selections; \
-    else true; fi
-
-RUN if lsb_release -cs | grep -q "precise"; then \
-    echo "Notice: it is precise, need workarounds and PPAs." && \
-    env DEBIAN_FRONTEND=noninteractive apt-get install -y python-software-properties && \
-    env DEBIAN_FRONTEND=noninteractive apt-add-repository -y ppa:ubuntu-mate-dev/ppa && \
-    env DEBIAN_FRONTEND=noninteractive apt-add-repository -y ppa:ubuntu-mate-dev/precise-mate && \
-    env DEBIAN_FRONTEND=noninteractive apt-get update && \
-    env DEBIAN_FRONTEND=noninteractive apt-get upgrade -y && \
-    env DEBIAN_FRONTEND=noninteractive apt-get install -y ubuntu-mate-core --force-yes; \
-    else true; fi
-
-RUN if lsb_release -cs | grep -q "trusty"; then \
-    echo "Notice: it is trusty, need workarounds and PPAs." && \    
-    env DEBIAN_FRONTEND=noninteractive apt-get install -y software-properties-common && \
-    env DEBIAN_FRONTEND=noninteractive apt-add-repository -y ppa:ubuntu-mate-dev/ppa && \
-    env DEBIAN_FRONTEND=noninteractive apt-add-repository -y ppa:ubuntu-mate-dev/trusty-mate && \
-    env DEBIAN_FRONTEND=noninteractive apt-get update && \
-    env DEBIAN_FRONTEND=noninteractive apt-get upgrade -y --force-yes && \
-    env DEBIAN_FRONTEND=noninteractive apt-get install -y ubuntu-mate-core --force-yes; \
-    else true; fi
-
-
-
+# Custom Packages And Sripts:
+RUN wget -O /custom.sh https://raw.githubusercontent.com/ramirezfx/xubuntu-desktop/kinetic-0.0.8/custom.sh && chmod +x /custom.sh
+RUN /custom.sh
 
 # Ubuntu MATE desktop
 # * package for 12.04 LTS and 14.04 LTS
@@ -108,35 +54,6 @@ RUN if lsb_release -cs | grep -qE "precise|trusty"; then \
       env DEBIAN_FRONTEND=noninteractive apt-get install -y \
       ubuntu-mate-desktop^; \
     fi
-
-# 20.10 specifics
-RUN if lsb_release -cs | grep -q "groovy"; then \
-    echo "Warning: it is groovy, will use workarounds!" && \    
-    env DEBIAN_FRONTEND=noninteractive sudo apt autopurge -y \
-      acpid acpi-support sssd-common; \
-    else true; fi
-
-# 21.04 specifics
-RUN if lsb_release -cs | grep -q "hirsute"; then \
-    echo "Warning: it is hirsute, will use workarounds!" && \
-        env DEBIAN_FRONTEND=noninteractive sudo apt autopurge -y \
-      acpid acpi-support redshift-gtk; \
-    else true; fi
-
-# 21.10 specifics
-RUN if lsb_release -cs | grep -qE "impish"; then \
-    echo "Warning: it is impish, will use workarounds!" && \
-        env DEBIAN_FRONTEND=noninteractive sudo apt autopurge -y \
-      acpid acpi-support redshift-gtk; \
-    else true; fi
-
-# 22.04 LTS specifics
-RUN if lsb_release -cs | grep -qE "jammy"; then \
-    echo "Warning: it is jammy, will use workarounds!" && \
-        env DEBIAN_FRONTEND=noninteractive sudo apt autopurge -y \
-      acpid acpi-support; \
-    else true; fi
-    
 
 # remove mate-screensaver
 RUN env DEBIAN_FRONTEND=noninteractive apt-get purge mate-screensaver -y
