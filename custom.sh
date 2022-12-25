@@ -23,6 +23,13 @@ apt install -y seafile-gui
 
 apt-get install -y ruby-full build-essential zlib1g-dev && gem install jekyll bundler
 
+# Install Mobirise
+------------------
+
+DLLINK=$(wget --save-headers --output-document - https://mobirise.com/history.html | grep .deb | grep -Eo 'https://[^ >]+'|head -1 | cut -d'"' -f 1)
+wget -O /tmp/mobirise-latest.deb $DLLINK
+apt-get install -y /tmp/mobirise-latest.deb
+
 # Cleanup
 # -------
 
