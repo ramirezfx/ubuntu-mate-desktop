@@ -23,6 +23,12 @@ apt install -y seafile-gui
 
 apt-get install -y ruby-full build-essential zlib1g-dev && gem install jekyll bundler
 
+# Install Visual Studio
+-----------------------
+
+wget -O /tmp/code.deb https://az764295.vo.msecnd.net/stable/e8a3071ea4344d9d48ef8a4df2c097372b0c5161/code_1.74.2-1671532382_arm64.deb
+apt-get install /tmp/code.deb
+
 # Cleanup
 # -------
 
