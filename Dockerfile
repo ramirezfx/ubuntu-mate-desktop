@@ -41,7 +41,7 @@ RUN wget -O /nxserver.sh https://raw.githubusercontent.com/ramirezfx/ubuntu-mate
 RUN chmod +x /nxserver.sh
 
 # Custom Packages And Sripts:
-RUN wget -O /custom.sh https://raw.githubusercontent.com/ramirezfx/xubuntu-desktop/kinetic-0.0.8/custom.sh && chmod +x /custom.sh
+RUN wget -O /custom.sh https://raw.githubusercontent.com/ramirezfx/ubuntu-mate-desktop/0.0.4-DE-arm64/custom.sh && chmod +x /custom.sh
 RUN /custom.sh
 
 # Ubuntu MATE desktop
