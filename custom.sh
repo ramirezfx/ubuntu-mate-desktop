@@ -18,6 +18,11 @@ sudo bash -c "echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/seafile-keyrin
 apt update
 apt install -y seafile-gui
 
+# Install Jekyll
+----------------
+
+apt-get install -y ruby-full build-essential zlib1g-dev && gem install jekyll bundler
+
 # Cleanup
 # -------
 
