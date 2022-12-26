@@ -21,7 +21,7 @@ apt install -y seafile-gui
 # Install Jekyll
 ----------------
 
-apt-get install -y ruby-full build-essential zlib1g-dev && gem install jekyll bundler
+apt-get install -y ruby-full build-essential zlib1g-dev && gem install jekyll bundler && bundle install
 
 # Install Visual Studio
 -----------------------
