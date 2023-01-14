@@ -9,6 +9,7 @@ echo "Pin: release o=LP-PPA-mozillateam" >> /etc/apt/preferences.d/mozilla-firef
 echo "Pin-Priority: 1001" >> /etc/apt/preferences.d/mozilla-firefox
 echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";' | sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
 apt install -y firefox
+mv /usr/share/applications/firefox.desktop /usr/share/applications/static-firefox.desktop
 
 # Download and install latest Google Chrome-Browser
 # -------------------------------------------------
