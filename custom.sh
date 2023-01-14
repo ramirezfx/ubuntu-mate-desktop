@@ -41,3 +41,4 @@ rm /tmp/mobirise-latest.deb
 # -------
 
 rm -Rf /var/cache/apt/archives
+rm -Rf /var/lib/snapd
