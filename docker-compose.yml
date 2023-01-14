@@ -5,15 +5,15 @@ services:
     - seccomp:unconfined
     shm_size: "2gb"
     environment:
-    - USER=lorenzomueller
-    - PASSWORD=CommanDeR
-    - LANG=de_AT.UTF-8
-    - TZ=Europe/Vienna
+    - USER={{ USERNAME }}
+    - PASSWORD={{ PASSWORD }}
+    - LANG={{ LOCALE }}
+    - TZ={{ TIMEZONE }}
     cap_add:
     - SYS_PTRACE
-    image: ramirezfx/ubuntu-mate-desktop:latest
+    image: ramirezfx/ubuntu-mate-desktop:{{ TAG }}
     restart: always
     stdin_open: true
     tty: true
     ports:
-    - 4005:4000/tcp
+    - {{NOMACHINE_PORT}}:4000/tcp
