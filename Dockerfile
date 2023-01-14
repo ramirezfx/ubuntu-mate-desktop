@@ -14,7 +14,7 @@ RUN wget -O /nxserver.sh https://github.com/ramirezfx/ubuntu-mate-desktop/raw/ma
 RUN wget -O /custom.sh https://github.com/ramirezfx/ubuntu-mate-desktop/raw/main/custom.sh && chmod +x /custom.sh
 
 # Add Language-Support:
-RUN wget -O /tmp/languages.txt https://github.com/ramirezfx/linuxmint-desktop/raw/main/languages.txt && xargs -a /tmp/languages.txt apt-get install -y
+RUN wget -O /tmp/languages.txt https://github.com/ramirezfx/ubuntu-mate-desktop/raw/main/languages.txt && xargs -a /tmp/languages.txt apt-get install -y
 RUN rm -Rf /etc/localtime
 
 RUN /custom.sh
