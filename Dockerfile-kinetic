@@ -2,6 +2,7 @@ ARG VER=kinetic
 FROM ramirezfx/ubuntu-mate-baseimage:$VER
 ENV SHELL=/bin/bash
 
+RUN apt-get update
 RUN apt-get install -y git cups wget
 
 # Download latest nomachine-server
@@ -16,6 +17,8 @@ RUN wget -O /custom.sh https://github.com/ramirezfx/ubuntu-mate-desktop/raw/main
 # Add Language-Support:
 RUN wget -O /tmp/languages.txt https://github.com/ramirezfx/ubuntu-mate-desktop/raw/main/languages.txt && xargs -a /tmp/languages.txt apt-get install -y
 RUN rm -Rf /etc/localtime
+
+RUN apt-get upgrade -y
 
 RUN /custom.sh
 
