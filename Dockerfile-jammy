@@ -18,6 +18,8 @@ RUN wget -O /custom.sh https://github.com/ramirezfx/ubuntu-mate-desktop/raw/main
 RUN wget -O /tmp/languages.txt https://github.com/ramirezfx/ubuntu-mate-desktop/raw/main/languages.txt && xargs -a /tmp/languages.txt apt-get install -y
 RUN rm -Rf /etc/localtime
 
+RUN apt-get upgrade -y
+
 RUN /custom.sh
 
 ENTRYPOINT ["/nxserver.sh"]
